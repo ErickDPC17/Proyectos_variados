@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prosegur Alarmas · Recuerdos y momentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFD500;--k:#000;--w:#fff;--g:#f3f3f1;--line:#000;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:70px;scroll-behavior:smooth;height:auto}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--w);color:var(--k);font-family:'Archivo',Arial,sans-serif;line-height:1.5}
+.hazard{height:14px;background:repeating-linear-gradient(-45deg,var(--y) 0 14px,var(--k) 14px 28px)}
+header{background:var(--k);color:var(--w);padding:28px 20px 34px}
+.wrap{max-width:1000px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.badge{width:44px;height:44px;background:var(--y);display:grid;place-items:center;border-radius:50%}
+.badge svg{width:24px;height:24px}
+.wm{font-weight:900;font-size:1.25rem;letter-spacing:.02em;line-height:1}
+.wm span{color:var(--y)}
+h1{font-weight:900;font-size:clamp(2.4rem,8vw,4.6rem);line-height:.98;margin:28px 0 12px;letter-spacing:-.02em;max-width:12ch}
+h1 mark{background:var(--y);color:var(--k);padding:0 .12em}
+header p{margin:0;max-width:44ch;color:#d8d8d8}
+nav{position:sticky;top:0;z-index:5;background:var(--y);border-bottom:3px solid var(--k);padding-top:env(safe-area-inset-top,0px)}
+nav .wrap{display:flex;overflow-x:auto}
+nav a{flex:1 0 auto;text-align:center;padding:14px 18px;color:var(--k);font-weight:800;text-decoration:none;white-space:nowrap}
+nav a:hover,nav a:focus-visible{background:var(--k);color:var(--y);outline:none}
+section{padding:48px 20px}
+section.alt{background:var(--g)}
+h2{font-weight:900;font-size:clamp(1.7rem,5vw,2.4rem);margin:0 0 6px;letter-spacing:-.01em}
+.sub{margin:0 0 24px;color:#444}
+.tip{background:var(--k);color:var(--w);padding:28px;border-left:14px solid var(--y)}
+.tip small{color:var(--y);font-weight:800}
+.tip p{font-size:clamp(1.2rem,3.4vw,1.7rem);font-weight:600;margin:8px 0 18px;line-height:1.3}
+button,.btn{font:inherit;font-weight:800;border:3px solid var(--k);background:var(--y);color:var(--k);padding:10px 18px;cursor:pointer;border-radius:0}
+button:hover{background:var(--k);color:var(--y)}
+.tip button{border-color:var(--y)}
+.tip button:hover{background:var(--y);color:var(--k)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--k);outline-offset:2px}
+.tip button:focus-visible{outline-color:var(--w)}
+form{display:grid;gap:10px;background:var(--w);border:3px solid var(--k);padding:18px;margin-bottom:24px}
+.row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+label{font-weight:800;font-size:.9rem;display:grid;gap:4px}
+input,textarea,select{font:inherit;padding:10px;border:2px solid var(--k);background:var(--w);color:var(--k);border-radius:0;width:100%}
+textarea{min-height:84px;resize:vertical}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{background:var(--w);border:3px solid var(--k);padding:18px;position:relative;display:flex;flex-direction:column;gap:8px}
+.card.y{background:var(--y)}
+.card h3{margin:0;font-size:1.15rem;font-weight:800}
+.card p{margin:0}
+.meta{font-size:.85rem;font-weight:600;color:#444}
+.card.y .meta{color:#000}
+.emoji{font-size:1.8rem;line-height:1}
+.del{position:absolute;top:8px;right:8px;padding:2px 9px;font-size:1rem;background:var(--w)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{padding:6px 14px;font-size:.9rem}
+.chip[aria-pressed=true]{background:var(--k);color:var(--y)}
+.today{background:var(--y);border:3px solid var(--k);padding:16px 20px;margin-bottom:20px;font-weight:800;display:flex;gap:12px;align-items:center}
+.days{font-weight:900;font-size:2rem;line-height:1}
+.empty{border:3px dashed var(--k);padding:24px;text-align:center;font-weight:600}
+footer{background:var(--k);color:#bbb;padding:26px 20px;font-size:.9rem}
+footer b{color:var(--y)}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linejoin="round"><path d="M12 2.5 4.5 5.5v6c0 4.6 3.1 8.4 7.5 10 4.4-1.6 7.5-5.4 7.5-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round"/></svg></div>
+      <div class="wm">PROSEGUR <span>ALARMAS</span></div>
+    </div>
+    <h1>Nuestros <mark>momentos</mark> juntos</h1>
+    <p>El espacio del equipo para guardar recuerdos, compartir la recomendación del día y no olvidar ningún cumpleaños.</p>
+  </div>
+</header>
+<div class="hazard" aria-hidden="true"></div>
+<nav aria-label="Secciones"><div class="wrap">
+  <a href="#recomendacion">Recomendación del día</a>
+  <a href="#recuerdos">Recuerdos</a>
+  <a href="#cumples">Cumpleaños</a>
+</div></nav>
+
+<section id="recomendacion"><div class="wrap">
+  <h2>Recomendación del día</h2>
+  <p class="sub" id="fecha"></p>
+  <div class="tip">
+    <small id="tipcat"></small>
+    <p id="tiptxt"></p>
+    <button id="otra" type="button">Ver otra recomendación</button>
+  </div>
+</div></section>
+
+<section id="recuerdos" class="alt"><div class="wrap">
+  <h2>Recuerdos y momentos</h2>
+  <p class="sub">Un evento, una anécdota, un logro del equipo. Súmalo aquí.</p>
+  <form id="fm">
+    <div class="row">
+      <label>Título<input id="mt" required maxlength="60" placeholder="Ej.: Cierre de campaña"></label>
+      <label>Fecha<input id="md" type="date" required></label>
+    </div>
+    <div class="row">
+      <label>Tu nombre<input id="ma" maxlength="40" placeholder="Opcional"></label>
+      <label>Tipo<select id="me"><option value="🎉">🎉 Celebración</option><option value="🏆">🏆 Logro</option><option value="🤝">🤝 Equipo</option><option value="📸">📸 Recuerdo</option></select></label>
+    </div>
+    <label>¿Qué pasó?<textarea id="mx" required maxlength="400" placeholder="Cuéntalo en pocas palabras"></textarea></label>
+    <div><button type="submit">Guardar recuerdo</button></div>
+  </form>
+  <div id="mlist" class="grid"></div>
+</div></section>
+
+<section id="cumples"><div class="wrap">
+  <h2>Cumpleaños</h2>
+  <p class="sub">Ordenados del más próximo al más lejano.</p>
+  <div id="hoy"></div>
+  <form id="fb">
+    <div class="row">
+      <label>Nombre<input id="bn" required maxlength="50" placeholder="Nombre y apellido"></label>
+      <label>Fecha de cumpleaños<input id="bd" type="date" required></label>
+    </div>
+    <div><button type="submit">Agregar cumpleaños</button></div>
+  </form>
+  <div class="chips" role="group" aria-label="Filtrar">
+    <button class="chip" type="button" data-f="all" aria-pressed="true">Todos</button>
+    <button class="chip" type="button" data-f="mes" aria-pressed="false">Este mes</button>
+  </div>
+  <div id="blist" class="grid"></div>
+</div></section>
+
+<div class="hazard" aria-hidden="true"></div>
+<footer><div class="wrap"><b>Prosegur Alarmas</b> · Espacio interno de recuerdos del equipo. Los datos se guardan solo en este navegador.</div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function load(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch(e){return def}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const now=new Date(), todayIso=iso(now);
+
+/* Recomendación del día */
+const TIPS=[
+['Hogar','Revisa que todas las puertas y ventanas estén bien cerradas antes de salir, aunque sea por poco tiempo.'],
+['Alarma','Activa tu alarma cada vez que salgas y también por la noche. Un hábito simple es la mejor protección.'],
+['Claves','Cambia el código de tu alarma cada pocos meses y evita fechas de cumpleaños o secuencias como 1234.'],
+['Vacaciones','Si viajas, no publiques tus fotos en tiempo real. Compártelas cuando ya hayas vuelto.'],
+['Hogar','Mantén iluminadas las entradas de tu casa. La buena luz disuade a quien busca pasar desapercibido.'],
+['Prevención','Prueba tu sistema de alarma una vez al mes para confirmar que todo responde correctamente.'],
+['Llaves','No dejes llaves de repuesto bajo el felpudo ni en macetas. Déjalas con alguien de confianza.'],
+['Visitas','Antes de abrir a alguien que no esperas, verifica quién es y por qué viene.'],
+['Negocio','Al cerrar el local, haz un recorrido final: puertas, cajas, luces y activación de alarma.'],
+['Contactos','Ten a mano los teléfonos de emergencia y mantén actualizados los contactos de tu alarma.'],
+['Digital','Usa claves distintas para tus cuentas y activa la verificación en dos pasos.'],
+['Hogar','Evita acumular correo o paquetes en la puerta: pide a un vecino que los recoja si no estás.'],
+['Equipo','Si ves algo extraño en tu zona, avisa a tiempo. Cuidarnos entre todos nos protege a todos.'],
+['Prevención','Revisa las baterías de tus sensores y detectores y cámbialas antes de que se agoten.']
+];
+const doy=Math.floor((now-new Date(now.getFullYear(),0,0))/864e5);
+let ti=doy%TIPS.length;
+function showTip(){$('tipcat').textContent=TIPS[ti][0];$('tiptxt').textContent=TIPS[ti][1]}
+$('fecha').textContent=now.getDate()+' de '+MESES[now.getMonth()]+' de '+now.getFullYear();
+$('otra').onclick=()=>{ti=(ti+1)%TIPS.length;showTip()};
+showTip();
+
+/* Recuerdos */
+let mem=load('pa_mem',null);
+if(!mem){mem=[
+ {id:1,t:'Bienvenida al nuevo año',d:now.getFullYear()+'-01-10',a:'Equipo',e:'🎉',x:'Arrancamos con energía y muchas metas por cumplir juntos.'},
+ {id:2,t:'Meta trimestral lograda',d:now.getFullYear()+'-06-28',a:'Equipo',e:'🏆',x:'Cerramos el trimestre superando el objetivo. ¡Gracias a todos!'}
+];save('pa_mem',mem)}
+function fmt(d){const p=d.split('-');return +p[2]+' de '+MESES[+p[1]-1]+' de '+p[0]}
+function drawMem(){
+  const l=[...mem].sort((a,b)=>b.d.localeCompare(a.d));
+  $('mlist').innerHTML=l.length?l.map((m,i)=>`<article class="card${i==0?' y':''}"><button class="del" data-id="${m.id}" aria-label="Eliminar recuerdo ${esc(m.t)}" type="button">×</button><span class="emoji" aria-hidden="true">${esc(m.e)}</span><h3>${esc(m.t)}</h3><p>${esc(m.x)}</p><div class="meta">${fmt(m.d)}${m.a?' · '+esc(m.a):''}</div></article>`).join(''):'<div class="empty">Aún no hay recuerdos. Agrega el primero con el formulario.</div>';
+}
+$('mlist').onclick=e=>{const b=e.target.closest('.del');if(!b)return;mem=mem.filter(m=>m.id!=b.dataset.id);save('pa_mem',mem);drawMem()};
+$('md').value=todayIso;
+$('fm').onsubmit=e=>{e.preventDefault();
+  mem.push({id:Date.now(),t:$('mt').value.trim(),d:$('md').value,a:$('ma').value.trim(),e:$('me').value,x:$('mx').value.trim()});
+  save('pa_mem',mem);drawMem();$('mt').value='';$('mx').value='';$('ma').value=''};
+drawMem();
+
+/* Cumpleaños */
+let bd=load('pa_bd',null);
+if(!bd){bd=[
+ {id:1,n:'Ana Torres',d:'1990-10-11'},
+ {id:2,n:'Luis Ramírez',d:'1988-10-25'},
+ {id:3,n:'Carla Mendoza',d:'1995-12-03'}
+];save('pa_bd',bd)}
+let filtro='all';
+function daysLeft(d){const p=d.split('-');let n=new Date(now.getFullYear(),+p[1]-1,+p[2]);const t=new Date(now.getFullYear(),now.getMonth(),now.getDate());if(n<t)n=new Date(now.getFullYear()+1,+p[1]-1,+p[2]);return Math.round((n-t)/864e5)}
+function drawBd(){
+  let l=bd.map(b=>({...b,k:daysLeft(b.d)})).sort((a,b)=>a.k-b.k);
+  const hoy=l.filter(b=>b.k===0);
+  $('hoy').innerHTML=hoy.length?`<div class="today"><span class="emoji" aria-hidden="true">🎂</span><span>¡Hoy cumple${hoy.length>1?'n':''} años ${hoy.map(b=>esc(b.n)).join(' y ')}! Mándale${hoy.length>1?'s':''} un saludo.</span></div>`:'';
+  if(filtro==='mes')l=l.filter(b=>+b.d.split('-')[1]-1===now.getMonth());
+  $('blist').innerHTML=l.length?l.map(b=>{const p=b.d.split('-');return `<article class="card${b.k===0?' y':''}"><button class="del" data-id="${b.id}" aria-label="Eliminar a ${esc(b.n)}" type="button">×</button><h3>${esc(b.n)}</h3><div class="meta">${+p[2]} de ${MESES[+p[1]-1]}</div><div class="days">${b.k===0?'¡Hoy!':b.k}</div><div class="meta">${b.k===0?'Feliz cumpleaños':b.k===1?'día para su cumpleaños':'días para su cumpleaños'}</div></article>`}).join(''):'<div class="empty">No hay cumpleaños para mostrar. Agrega uno con el formulario.</div>';
+}
+$('blist').onclick=e=>{const b=e.target.closest('.del');if(!b)return;bd=bd.filter(x=>x.id!=b.dataset.id);save('pa_bd',bd);drawBd()};
+$('fb').onsubmit=e=>{e.preventDefault();bd.push({id:Date.now(),n:$('bn').value.trim(),d:$('bd').value});save('pa_bd',bd);drawBd();$('bn').value='';$('bd').value=''};
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{filtro=c.dataset.f;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));drawBd()});
+drawBd();
+</script>
+</body>
+</html>
